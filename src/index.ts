@@ -104,4 +104,4 @@ function Application(): Application {
  * Expose `Application()`.
  */
 
-export = module.exports = Application;
+export default Application;
