@@ -2,7 +2,8 @@
   "name": "server",
   "version": "1.0.0",
   "description": "request server handler",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "private": true,
   "scripts": {
