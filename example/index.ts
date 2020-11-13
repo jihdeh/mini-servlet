@@ -1,7 +1,9 @@
 import server from '../src';
 const app = server();
 
-app.get('/recipes', (req, res) => {
+app.get('/recipes', (req, res, next) => {
+  next()
+}, (req, res) => {
   res.json(['recipes on grades']);
 });
 

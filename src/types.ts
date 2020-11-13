@@ -13,7 +13,7 @@ export interface RequestHandler extends http.IncomingMessage {
 export interface ResponseHandler extends http.ServerResponse {
   get: (field: string) => string | number | string[] | undefined;
   send: (field: string) => void;
-  json: (field: Record<string, unknown>) => void;
+  json: (field: Record<string, any>) => void;
 }
 
 export interface ServerConfigInterface {

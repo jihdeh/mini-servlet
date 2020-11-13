@@ -45,7 +45,7 @@ const configurePath = (
   }
 };
 
-type CallbackMiddleware = (req: RequestHandler, res: ResponseHandler, callback: () => void) => void;
+type CallbackMiddleware = (req: RequestHandler, res: ResponseHandler, callback: (error: Error) => void) => void;
 
 /**
  * Function helps to call middleware callbacks passed to application path
@@ -70,8 +70,14 @@ const processMiddleware = (
   return Promise.all(
     middlewares.map(
       (middleware: CallbackMiddleware) =>
-        new Promise((resolve) => {
-          middleware(req, res, function () {
+        new Promise((resolve, reject) => {
+          middleware(req, res, function (error: Error) {
+            if(error) {
+              reject(error);
+              res.statusCode = 400;
+              res.json(error);
+              res.end();
+            }
             resolve(true);
           });
         }),

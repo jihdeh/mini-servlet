@@ -1,6 +1,6 @@
 import { Middleware, RequestHandler, ResponseHandler, ServerConfigInterface } from './types';
 declare const configurePath: (urlPath: string, middlewareCb: Middleware[], method: 'get' | 'post' | 'put' | 'delete', routeTable: ServerConfigInterface['routeTable']) => void;
-declare type CallbackMiddleware = (req: RequestHandler, res: ResponseHandler, callback: () => void) => void;
+declare type CallbackMiddleware = (req: RequestHandler, res: ResponseHandler, callback: (error: Error) => void) => void;
 /**
  * Function helps to call middleware callbacks passed to application path
  * ex:
