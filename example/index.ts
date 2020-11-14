@@ -1,9 +1,15 @@
+
 import server from '../src';
 const app = server();
 
-app.get('/recipes',(req, res, next) => {
-  next('error', 404);
+app.get('/recipes', (req, res, next) => {
+  // throw new Error('commp')
+  next();
+}, (req, res, next) => {
+  // throw new Error('commp')
+  next();
 }, (req, res) => {
+  console.log('still comes to execute?')
   try {
   throw new Error('haba');
   } catch(e) {
@@ -36,6 +42,6 @@ app.post('/recipes/:id/rating', (req, res) => {
   res.send(req.body);
 });
 
-app.listen(3000, () => {
-  console.log('Server running on 3000');
+app.listen(4000, () => {
+  console.log('Server running on 4000');
 });

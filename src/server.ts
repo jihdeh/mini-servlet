@@ -72,9 +72,10 @@ const processCallback = async function (this: typeof serverConfig) {
   const callback = route[methodToLower];
 
   if (this.pathMatch && callback) {
+    const middlewarePattern = new RegExp(`${methodToLower}-middleware-[0-9]`);
     const middlewares = Object.keys(route)
       .map((methodName) => {
-        if (methodName.includes(`${methodToLower}-middleware`)) {
+        if (methodName.match(middlewarePattern)) {
           return route[methodName];
         }
       })
@@ -91,9 +92,12 @@ const processCallback = async function (this: typeof serverConfig) {
     body = body ? JSON.parse(body) : {};
 
     this.req.body = body;
+    const result = await (await processMiddleware(middlewares, this.req, response(this.res))).filter(Boolean);
 
-    const result = await processMiddleware(middlewares, this.req, response(this.res));
-    if (result.length) {
+    //make sure the length of the middleware functions match the processed
+    //functions otherwise don't go to last function call.
+    const callbacksMatch = result.length === middlewares.length;
+    if (callbacksMatch) {
       callback(this.req, this.res);
     }
     return true;

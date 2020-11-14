@@ -35,12 +35,13 @@ const configurePath = (
   if (middlewareCb.length === 1) {
     registerPath(urlPath, middlewareCb[0], method)(routeTable);
   } else {
-    for (let i = 0; i < middlewareCb.length; i++) {
+    const lastFunction = middlewareCb.length - 1;
+    for (let i = 0; i < lastFunction; i++) {
       let nextIdx = 1; //used to register next middleware callbacks
       if (nextIdx > 0) {
         nextIdx = i;
       }
-      registerPath(urlPath, middlewareCb[nextIdx], method, middlewareCb[i])(routeTable, i);
+      registerPath(urlPath, middlewareCb[lastFunction], method, middlewareCb[i])(routeTable, i);
     }
   }
 };
@@ -74,10 +75,12 @@ const processMiddleware = (
           if (error) {
             res.statusCode = statusCode;
             res.json(error);
+          } else {
+            resolve(true);
           }
-          resolve(true);
         });
       }).catch((error) => {
+        //handle unHandledPromiseRejections
         res.statusCode = 400;
         res.json({
           name: error.name,
