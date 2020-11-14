@@ -74,9 +74,8 @@ const processMiddleware = (
           middleware(req, res, function (error: Error) {
             if(error) {
               reject(error);
-              res.statusCode = 400;
+              res.statusCode = 500;
               res.json(error);
-              res.end();
             }
             resolve(true);
           });

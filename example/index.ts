@@ -2,7 +2,7 @@ import server from '../src';
 const app = server();
 
 app.get('/recipes', (req, res, next) => {
-  next()
+  next('error')
 }, (req, res) => {
   res.json(['recipes on grades']);
 });
