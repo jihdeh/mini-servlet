@@ -70,10 +70,9 @@ const processMiddleware = (
   return Promise.all(
     middlewares.map(
       (middleware: CallbackMiddleware) =>
-        new Promise((resolve, reject) => {
+        new Promise((resolve) => {
           middleware(req, res, function (error: Error) {
-            if(error) {
-              reject(error);
+            if (error) {
               res.statusCode = 500;
               res.json(error);
             }

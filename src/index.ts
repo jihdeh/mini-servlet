@@ -93,7 +93,7 @@ const app: Application = {
     // eslint-disable-next-line prefer-spread
     const [port, callback] = params;
     return server.listen(port, callback);
-  }
+  },
 };
 
 function Application(): Application {
@@ -103,4 +103,4 @@ function Application(): Application {
 /**
  * Expose `Application()`.
  */
-export = module.exports = Application;
+export = (module.exports = Application);
