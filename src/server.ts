@@ -93,7 +93,6 @@ const processCallback = async function (this: typeof serverConfig) {
 
     this.req.body = body;
     const result = await (await processMiddleware(middlewares, this.req, response(this.res))).filter(Boolean);
-    console.log(result, middlewares);
 
     //make sure the length of the middleware functions match the processed
     //functions otherwise don't go to last function call.
