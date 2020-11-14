@@ -78,6 +78,7 @@ const processMiddleware = (
           resolve(true);
         });
       }).catch((error) => {
+        res.statusCode = 400;
         res.json({
           name: error.name,
           message: error.message,
