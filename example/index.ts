@@ -1,10 +1,18 @@
 import server from '../src';
 const app = server();
 
-app.get('/recipes', (req, res, next) => {
-  next('error')
+app.get('/recipes',(req, res, next) => {
+  next('error', 404);
 }, (req, res) => {
-  res.json(['recipes on grades']);
+  try {
+  throw new Error('haba');
+  } catch(e) {
+    console.log(e);
+    res.statusCode = 400;
+    res.send(e.message)
+  }
+
+  // res.json(['recipes on grades']);
 });
 
 app.get('/recipes/:id', (req, res) => {

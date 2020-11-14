@@ -88,7 +88,7 @@ const app: Application = {
    * @public
    */
 
-  listen: function listen(...params: any) {
+  listen: function listen(...params: any): http.Server {
     const server = http.createServer(serverConfig.init);
     // eslint-disable-next-line prefer-spread
     const [port, callback] = params;

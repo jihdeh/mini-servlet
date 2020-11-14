@@ -68,17 +68,22 @@ const processMiddleware = (
   }
 
   return Promise.all(
-    middlewares.map(
-      (middleware: CallbackMiddleware) =>
-        new Promise((resolve) => {
-          middleware(req, res, function (error: Error) {
-            if (error) {
-              res.statusCode = 500;
-              res.json(error);
-            }
-            resolve(true);
-          });
-        }),
+    middlewares.map((middleware: CallbackMiddleware) =>
+      new Promise((resolve) => {
+        middleware(req, res, function (error: Error, statusCode = 500) {
+          if (error) {
+            res.statusCode = statusCode;
+            res.json(error);
+          }
+          resolve(true);
+        });
+      }).catch((error) => {
+        res.json({
+          name: error.name,
+          message: error.message,
+          stack: error.stack,
+        });
+      }),
     ),
   );
 };
