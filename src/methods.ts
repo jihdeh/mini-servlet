@@ -10,6 +10,7 @@ import { configurePath } from './utils';
  */
 const Methods = Object.create({});
 
+
 /**
  * Get configuration for GET method request
  * example
@@ -28,6 +29,7 @@ const Methods = Object.create({});
 Methods.get = (path: string, ...fns: any[]) => {
   configurePath(path, fns, 'get', serverConfig.routeTable);
 };
+
 
 /**
  * Post configuration for POST method request
@@ -48,6 +50,7 @@ Methods.post = (path: string, ...fns: any[]) => {
   configurePath(path, fns, 'post', serverConfig.routeTable);
 };
 
+
 /**
  * Put configuration for PUT method request
  * @param {String} path request url path
@@ -58,16 +61,17 @@ Methods.put = (path: string, ...fns: any[]) => {
   configurePath(path, fns, 'put', serverConfig.routeTable);
 };
 
+
 /**
  * Delete configuration for DELETE method request
  * @param {String} path request url path
  * @param  {...Function} fns these are middleware callback funtions
  * @public
  */
-
 Methods.delete = (path: string, ...fns: any[]) => {
   configurePath(path, fns, 'delete', serverConfig.routeTable);
 };
+
 
 /**
  * Listen for connections.
@@ -95,5 +99,6 @@ Methods.listen = (...params: any): http.Server => {
   const [port, callback] = params;
   return server.listen(port, callback);
 };
+
 
 export = (module.exports = Methods);

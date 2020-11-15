@@ -1,7 +1,9 @@
-import { Application } from './types';
-declare function Application(): Application;
-declare const _default: typeof Application;
 /**
- * Expose `Application()`.
+ * Expose `Server()`.
  */
+declare function Server(): {
+    Servlets: any;
+    Server: (req: any, res: any) => Promise<void> | undefined;
+};
+declare const _default: typeof Server;
 export = _default;

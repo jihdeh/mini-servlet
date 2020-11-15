@@ -1,6 +1,6 @@
 import request from 'supertest';
 import httpStatus from 'http-status';
-import app from '../../example';
+import app from '../example';
 
 describe('Recipe routes', () => {
   describe('GET /recipes', () => {
