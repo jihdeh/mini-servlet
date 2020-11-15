@@ -45,7 +45,6 @@ const serverConfig: ServerConfigInterface = {
       const urlNoQueryParam = this.req.url?.split('?')[0] || '';
       const regexp = pathToRegexp(this.route);
       this.pathMatch = regexp.exec(urlNoQueryParam);
-
       const requestProcessed = await processCallback.apply(this);
 
       match = requestProcessed;
