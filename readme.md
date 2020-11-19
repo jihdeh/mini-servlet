@@ -43,6 +43,7 @@ The `next()` function in the middleware also returns an error 500 if a parameter
 *@TODO*
 
  - Unit/Integration testing
+ - Combine exposed methods to one and expose as an event emitter function.
  - Performance testing
  - More functionalities
  - build commands on push
