@@ -45,3 +45,4 @@ The `next()` function in the middleware also returns an error 500 if a parameter
  - Unit/Integration testing
  - Performance testing
  - More functionalities
+ - build commands on push
